@@ -3,7 +3,7 @@
 created with cra.
 
 - [x] add dnd
-- [ ] add state 
+- [x] add store 
 - [ ] add changing background
 - [ ] add task input
 - [ ] add list input

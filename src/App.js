@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from './componets/Column';
-import initialDate from './initial-date';
+import { connect } from 'react-redux';
 
 const Container = styled.div`
   display: flex;
 `;
 
-function App() {
-  const [state, setState] = useState(initialDate);
+function App(props) {
+  const [state, setState] = useState(props.store);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -90,4 +90,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    store: state.tasksReducer,
+  };
+};
+
+export default connect(mapStateToProps)(App);
