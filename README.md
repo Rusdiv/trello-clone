@@ -8,4 +8,4 @@ created with cra.
 - [x] saving tasks
 - [ ] add task input
 - [ ] add list input
-- [ ] remove tasks
+- [ ] removing tasks
