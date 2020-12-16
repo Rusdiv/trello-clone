@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import Column from './Column';
-import { addNewTask, addToLocalStorage } from '../store/reducers/tasksReducer';
+import {
+  addNewTask,
+  addToLocalStorage,
+  setState,
+} from '../store/reducers/tasksReducer';
 
 const Container = styled.div`
-  display: inline;
+  display: flex;
   height: 100%;
 `;
 
 function ListsContainer(props) {
-  const [state, setState] = useState(props.store);
+  const state = props.state;
+  // const [state, setState] = useState(props.store);
+
+  const onButtonClick = () => {
+    props.addNewTask('text');
+    props.addToLocalStorage({ ...state });
+  };
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -48,7 +58,7 @@ function ListsContainer(props) {
           [newColumn.id]: newColumn,
         },
       };
-      setState(newState);
+      props.setState(newState);
       return;
     }
 
@@ -76,7 +86,8 @@ function ListsContainer(props) {
       },
     };
 
-    setState(newState);
+    props.setState(newState);
+    props.addToLocalStorage(newState);
   };
 
   return (
@@ -88,23 +99,19 @@ function ListsContainer(props) {
           return <Column key={column.id} column={column} tasks={tasks} />;
         })}
       </Container>
-      <button
-        onClick={() => {
-          props.addToLocalStorage();
-        }}
-      >
-        AddTask
-      </button>
+      <button onClick={() => onButtonClick()}>addTask</button>
     </DragDropContext>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    store: state.tasksReducer,
+    state: state.tasksReducer,
   };
 };
 
-export default connect(mapStateToProps, { addNewTask, addToLocalStorage })(
-  ListsContainer
-);
+export default connect(mapStateToProps, {
+  setState,
+  addNewTask,
+  addToLocalStorage,
+})(ListsContainer);

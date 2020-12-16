@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { ChromePicker } from 'react-color';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import {
+  changeBackground,
+  addToLocalStorage,
+} from '../store/reducers/tasksReducer';
 
 const Container = styled.div`
   height: 100%;
@@ -20,28 +25,43 @@ const Picker = styled.div`
   right: 10px;
 `;
 
-export default function ColorPicker() {
-  const [background, setBackground] = useState('#fff');
+function ColorPicker(props) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
 
   const handleChangeComplete = (color) => {
-    setBackground(color.hex);
+    props.changeBackground(color.hex);
+    props.addToLocalStorage({ ...props.state });
   };
 
   return (
     <div>
-      <Container color={background}></Container>
+      <Container color={props.background}></Container>
       <Picker>
         {!buttonVisibility && (
-          <button onClick={setButtonVisibility}>ChangeColor</button>
+          <button onClick={() => setButtonVisibility(true)}>ChangeColor</button>
         )}
         {buttonVisibility && (
           <ChromePicker
-            color={background}
+            color={props.background}
             onChangeComplete={handleChangeComplete}
           />
+        )}
+        {buttonVisibility && (
+          <button onClick={() => setButtonVisibility(false)}>close</button>
         )}
       </Picker>
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    background: state.tasksReducer.background,
+    state: state.tasksReducer,
+  };
+};
+
+export default connect(mapStateToProps, {
+  addToLocalStorage,
+  changeBackground,
+})(ColorPicker);
