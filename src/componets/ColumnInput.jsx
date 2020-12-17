@@ -11,7 +11,7 @@ function ColumnInput(props) {
   };
 
   const handleClick = () => {
-    if (inputTextValue != '') {
+    if (inputTextValue !== '') {
       props.addNewTask(inputTextValue);
       setInputVisibility(false);
     } else {
