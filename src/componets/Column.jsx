@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 import Task from './Task';
+import ColumnInput from './ColumnInput';
 
 const Container = styled.div`
   min-heigth: 100px;
@@ -34,6 +35,7 @@ export default function Column(props) {
           </TaskList>
         )}
       </Droppable>
+      <ColumnInput />
     </Container>
   );
 }

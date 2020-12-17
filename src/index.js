@@ -14,3 +14,10 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+const addToLocalStorage = () => {
+  const newState = JSON.stringify(store.getState().tasksReducer);
+  localStorage.setItem('state', newState);
+};
+
+store.subscribe(addToLocalStorage);

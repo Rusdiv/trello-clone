@@ -12,6 +12,54 @@ code {
     monospace;
 }
 
-.sc-hKgILt, .fAeowZ {
+.sc-hKgILt,
+.fAeowZ {
   height: 100%;
+}
+
+.card__input {
+  width: 250px;
+  margin: 0 auto;
+  display: block;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+  cursor: pointer;
+  display: block;
+  margin-bottom: 8px;
+  max-width: 300px;
+  min-height: 72px;
+  resize: vertical;
+  padding: 5px;
+}
+
+.card__textButton {
+  text-align: center;
+  border-radius: 3px;
+  color: #5e6c84;
+  display: block;
+  padding: 8px 8px;
+  position: relative;
+  text-decoration: none;
+}
+
+.card__textButton:hover {
+  background: rgba(216, 216, 216, 0.822);
+}
+
+.card__button {
+  outline: none;
+  margin: 5px;
+  background-color: #5aac44;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.card__button:hover {
+  background-color: #6cd84e;
 }

@@ -25,3 +25,4 @@ const initialState = {
   columnOrder: ['column1', 'column2', 'column3'],
   background: '#fff',
 };
+export default initialState;

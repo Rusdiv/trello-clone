@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import Column from './Column';
-import {
-  addNewTask,
-  addToLocalStorage,
-  setState,
-} from '../store/reducers/tasksReducer';
+import { addNewTask, setState } from '../store/reducers/tasksReducer';
 
 const Container = styled.div`
   display: flex;
@@ -87,7 +83,6 @@ function ListsContainer(props) {
     };
 
     props.setState(newState);
-    props.addToLocalStorage(newState);
   };
 
   return (
@@ -99,7 +94,6 @@ function ListsContainer(props) {
           return <Column key={column.id} column={column} tasks={tasks} />;
         })}
       </Container>
-      <button onClick={() => onButtonClick()}>addTask</button>
     </DragDropContext>
   );
 }
@@ -113,5 +107,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   setState,
   addNewTask,
-  addToLocalStorage,
 })(ListsContainer);

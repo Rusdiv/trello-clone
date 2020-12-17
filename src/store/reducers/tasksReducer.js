@@ -1,9 +1,13 @@
+import initialDate from '../../initial-date';
 const ADD_TASK = 'ADD_TASK';
-const ADD_TO_LOCALSTORAGE = 'ADD_TO_LOCALSTORAGE';
 const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
 const SET_STATE = 'SET_STATE';
 
-const initialState = JSON.parse(localStorage.getItem('state'));
+let initialState = JSON.parse(localStorage.getItem('state'));
+
+if (!initialState) {
+  initialState = initialDate;
+}
 
 let idCounter = Object.keys(initialState.tasks).length + 1;
 
@@ -27,12 +31,6 @@ const tasksReducer = (state = initialState, action) => {
           },
         },
       };
-    case ADD_TO_LOCALSTORAGE:
-      const newState = JSON.stringify(state);
-      localStorage.setItem('state', newState);
-      return {
-        ...state,
-      };
     case CHANGE_BACKGROUND:
       return {
         ...state,
@@ -50,14 +48,12 @@ const tasksReducer = (state = initialState, action) => {
 };
 
 export const addNewTask = (newTaskText) => ({ type: ADD_TASK, newTaskText });
-export const addToLocalStorage = (state) => ({
-  type: ADD_TO_LOCALSTORAGE,
-  state,
-});
+
 export const changeBackground = (color) => ({
   type: CHANGE_BACKGROUND,
   color,
 });
+
 export const setState = (newState) => ({
   type: SET_STATE,
   newState,

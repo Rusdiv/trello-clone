@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {
-  changeBackground,
-  addToLocalStorage,
-} from '../store/reducers/tasksReducer';
+import { changeBackground } from '../store/reducers/tasksReducer';
 
 const Container = styled.div`
   height: 100%;
@@ -30,7 +27,6 @@ function ColorPicker(props) {
 
   const handleChangeComplete = (color) => {
     props.changeBackground(color.hex);
-    props.addToLocalStorage({ ...props.state });
   };
 
   return (
@@ -62,6 +58,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  addToLocalStorage,
   changeBackground,
 })(ColorPicker);
