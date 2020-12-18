@@ -12,12 +12,6 @@ const Container = styled.div`
 
 function ListsContainer(props) {
   const state = props.state;
-  // const [state, setState] = useState(props.store);
-
-  const onButtonClick = () => {
-    props.addNewTask('text');
-    props.addToLocalStorage({ ...state });
-  };
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;

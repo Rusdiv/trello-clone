@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -33,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
 function LoginForm(props) {
   const classes = useStyles();
 
+  const [passwordValue, setPasswordValue] = useState('');
+  const [loginValue, setLoginValue] = useState('');
+
+  const onPasswordChange = (e) => {
+    setPasswordValue(e.target.value);
+  };
+
+  const onLoginChange = (e) => {
+    setLoginValue(e.target.value);
+  };
+
   if (props.isAuth) return <Redirect to="/" />;
 
   return (
@@ -41,10 +52,11 @@ function LoginForm(props) {
         variant="outlined"
         margin="normal"
         fullWidth
-        id="email"
-        label="Email Address"
-        name="email"
-        autoComplete="email"
+        label="login"
+        name="login"
+        autoComplete="login"
+        onChange={onLoginChange}
+        value={loginValue}
         autoFocus
       />
       <TextField
@@ -56,6 +68,8 @@ function LoginForm(props) {
         type="password"
         id="password"
         autoComplete="current-password"
+        onChange={onPasswordChange}
+        value={passwordValue}
       />
       <FormControlLabel
         control={<Checkbox value="remember" color="primary" />}
@@ -67,7 +81,7 @@ function LoginForm(props) {
         variant="contained"
         color="primary"
         className={classes.submit}
-        onClick={() => props.logIn()}
+        onClick={() => props.logIn(loginValue, passwordValue)}
       >
         Sign In
       </Button>

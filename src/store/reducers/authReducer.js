@@ -1,3 +1,5 @@
+import { login } from '../../backend/backend';
+
 const LogIn = 'LogIn';
 
 const initialState = {
@@ -8,9 +10,22 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LogIn:
+      const user = login(action.login, action.password);
+      if (user.length === 1) {
+        if (user[0].isAdmin === true) {
+          return {
+            ...state,
+            isAuth: true,
+            isAdmin: true,
+          };
+        }
+        return {
+          ...state,
+          isAuth: true,
+        };
+      }
       return {
         ...state,
-        isAuth: true,
       };
     default:
       return {
@@ -19,6 +34,6 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const logIn = () => ({ type: LogIn });
+export const logIn = (login, password) => ({ type: LogIn, login, password });
 
 export default authReducer;

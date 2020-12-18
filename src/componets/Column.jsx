@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 import Task from './Task';
 import ColumnInput from './ColumnInput';
+import { connect } from 'react-redux';
 
 const Container = styled.div`
   min-heigth: 100px;
@@ -21,7 +22,7 @@ const TaskList = styled.div`
   padding: 8px;
 `;
 
-export default function Column(props) {
+function Column(props) {
   return (
     <Container>
       <Title>{props.column.title}</Title>
@@ -35,7 +36,15 @@ export default function Column(props) {
           </TaskList>
         )}
       </Droppable>
-      <ColumnInput columnId={props.column.id} title={props.column.title} />
+      {props.isAdmin && (
+        <ColumnInput columnId={props.column.id} title={props.column.title} />
+      )}
     </Container>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    isAdmin: state.authReducer.isAdmin,
+  };
+};
+export default connect(mapStateToProps)(Column);

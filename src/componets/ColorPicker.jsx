@@ -32,20 +32,24 @@ function ColorPicker(props) {
   return (
     <div>
       <Container color={props.background}></Container>
-      <Picker>
-        {!buttonVisibility && (
-          <button onClick={() => setButtonVisibility(true)}>ChangeColor</button>
-        )}
-        {buttonVisibility && (
-          <ChromePicker
-            color={props.background}
-            onChangeComplete={handleChangeComplete}
-          />
-        )}
-        {buttonVisibility && (
-          <button onClick={() => setButtonVisibility(false)}>close</button>
-        )}
-      </Picker>
+      {props.isAdmin && (
+        <Picker>
+          {!buttonVisibility && (
+            <button onClick={() => setButtonVisibility(true)}>
+              ChangeColor
+            </button>
+          )}
+          {buttonVisibility && (
+            <ChromePicker
+              color={props.background}
+              onChangeComplete={handleChangeComplete}
+            />
+          )}
+          {buttonVisibility && (
+            <button onClick={() => setButtonVisibility(false)}>close</button>
+          )}
+        </Picker>
+      )}
     </div>
   );
 }
@@ -54,6 +58,7 @@ const mapStateToProps = (state) => {
   return {
     background: state.tasksReducer.background,
     state: state.tasksReducer,
+    isAdmin: state.authReducer.isAdmin,
   };
 };
 
