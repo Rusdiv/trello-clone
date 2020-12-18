@@ -15,6 +15,7 @@ const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TASK:
       const newTaskId = `task-${idCounter}`;
+      const columnId = action.columnId;
       ++idCounter;
       return {
         ...state,
@@ -24,10 +25,10 @@ const tasksReducer = (state = initialState, action) => {
         },
         columns: {
           ...state.columns,
-          column1: {
-            id: 'column1',
-            title: 'To do',
-            taskIds: [...state.columns.column1.taskIds, newTaskId],
+          [action.columnId]: {
+            title: action.title,
+            id: action.columnId,
+            taskIds: [...state.columns[columnId].taskIds, newTaskId],
           },
         },
       };
@@ -47,7 +48,12 @@ const tasksReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewTask = (newTaskText) => ({ type: ADD_TASK, newTaskText });
+export const addNewTask = (newTaskText, columnId, title) => ({
+  type: ADD_TASK,
+  newTaskText,
+  columnId,
+  title
+});
 
 export const changeBackground = (color) => ({
   type: CHANGE_BACKGROUND,

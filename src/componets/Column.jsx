@@ -35,7 +35,7 @@ export default function Column(props) {
           </TaskList>
         )}
       </Droppable>
-      <ColumnInput />
+      <ColumnInput columnId={props.column.id} title={props.column.title} />
     </Container>
   );
 }
