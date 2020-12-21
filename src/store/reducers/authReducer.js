@@ -3,8 +3,8 @@ import { login } from '../../backend/backend';
 const LogIn = 'LogIn';
 
 const initialState = {
-  isAuth: false,
-  isAdmin: false,
+  isAuth: true,
+  isAdmin: true,
 };
 
 const authReducer = (state = initialState, action) => {

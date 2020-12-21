@@ -1,7 +1,9 @@
 import initialDate from '../../initial-date';
+
 const ADD_TASK = 'ADD_TASK';
 const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
 const SET_STATE = 'SET_STATE';
+const ADD_URL = 'ADD_URL';
 
 let initialState = JSON.parse(localStorage.getItem('state'));
 
@@ -21,7 +23,11 @@ const tasksReducer = (state = initialState, action) => {
         ...state,
         tasks: {
           ...state.tasks,
-          [newTaskId]: { id: newTaskId, content: action.newTaskText },
+          [newTaskId]: {
+            id: newTaskId,
+            content: action.newTaskText,
+            url: null,
+          },
         },
         columns: {
           ...state.columns,
@@ -41,6 +47,14 @@ const tasksReducer = (state = initialState, action) => {
       return {
         ...action.newState,
       };
+    case ADD_URL:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: { ...state.tasks[action.taskId], url: action.url },
+        },
+      };
     default:
       return {
         ...state,
@@ -52,12 +66,18 @@ export const addNewTask = (newTaskText, columnId, title) => ({
   type: ADD_TASK,
   newTaskText,
   columnId,
-  title
+  title,
 });
 
 export const changeBackground = (color) => ({
   type: CHANGE_BACKGROUND,
   color,
+});
+
+export const addUrl = (url, taskId) => ({
+  type: ADD_URL,
+  taskId,
+  url,
 });
 
 export const setState = (newState) => ({

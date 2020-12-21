@@ -1,45 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { connect } from 'react-redux';
+import { addUrl } from '../store/reducers/tasksReducer';
 
-export default function TaskPopup() {
-  const [open, setOpen] = React.useState(false);
+function TaskPopup(props) {
+  const [url, setUrl] = useState('');
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleChange = (e) => {
+    setUrl(e.target.value);
   };
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogContent>
-          <TextField autoFocus margin="dense" label="URL" fullWidth />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Закрыть
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Сохранить
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogContent>
+        Добавить ссылку
+        <TextField
+          onChange={handleChange}
+          value={url}
+          autoFocus
+          margin="dense"
+          label="URL"
+          fullWidth
+        />
+        {props.url && (
+          <div>
+            <p>Прикрепленные ссылки:</p>
+            <a href={props.url}>{props.url}</a>
+          </div>
+        )}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={props.handleClose} color="primary">
+          Закрыть
+        </Button>
+        <Button onClick={() => props.addUrl(url, props.taskId)} color="primary">
+          Сохранить
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }
+
+export default connect(null, { addUrl })(TaskPopup);

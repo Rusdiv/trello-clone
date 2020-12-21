@@ -1,9 +1,9 @@
 const initialState = {
   tasks: {
-    'task-1': { id: 'task-1', content: 'some text about dnd' },
-    'task-2': { id: 'task-2', content: 'lalala' },
-    'task-3': { id: 'task-3', content: 'Learn React' },
-    'task-4': { id: 'task-4', content: 'Learn , learn and learn' },
+    'task-1': { id: 'task-1', content: 'some text about dnd', url: 'https://edu.tatar.ru/logon' },
+    'task-2': { id: 'task-2', content: 'lalala', url: null },
+    'task-3': { id: 'task-3', content: 'Learn React', url: null },
+    'task-4': { id: 'task-4', content: 'Learn , learn and learn', url: null },
   },
   columns: {
     column1: {
@@ -23,6 +23,6 @@ const initialState = {
     },
   },
   columnOrder: ['column1', 'column2', 'column3'],
-  background: '#fff',
+  background: '#92F153',
 };
 export default initialState;

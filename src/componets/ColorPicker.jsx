@@ -11,8 +11,13 @@ const Container = styled.div`
   top: 0;
   z-index: -1;
   ${(props) => `
-    background: ${props.color};
+    background: ${props.background};
   `};
+  ${(props) => {
+    if (props.url !== '') {
+      return `background: ${props.url};`;
+    }
+  }}
 `;
 
 const Picker = styled.div`
@@ -24,31 +29,52 @@ const Picker = styled.div`
 
 function ColorPicker(props) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
+  const [buttonVisibilityPhoto, setButtonVisibilityPhoto] = useState(false);
 
   const handleChangeComplete = (color) => {
     props.changeBackground(color.hex);
   };
 
+  const [url, setUrl] = useState('');
+
+  const handleChange = (e) => {
+    setUrl(e.target.value);
+  };
+
   return (
     <div>
-      <Container color={props.background}></Container>
+      <Container background={props.background} url={url}></Container>
       {props.isAdmin && (
-        <Picker>
-          {!buttonVisibility && (
-            <button onClick={() => setButtonVisibility(true)}>
-              ChangeColor
-            </button>
-          )}
-          {buttonVisibility && (
-            <ChromePicker
-              color={props.background}
-              onChangeComplete={handleChangeComplete}
-            />
-          )}
-          {buttonVisibility && (
-            <button onClick={() => setButtonVisibility(false)}>close</button>
-          )}
-        </Picker>
+        <div>
+          <Picker>
+            {!buttonVisibility && (
+              <button onClick={() => setButtonVisibility(true)}>
+                Поменять цвет фона
+              </button>
+            )}
+            {buttonVisibility && (
+              <ChromePicker
+                color={props.background}
+                onChangeComplete={handleChangeComplete}
+              />
+            )}
+            {buttonVisibility && (
+              <button onClick={() => setButtonVisibility(false)}>
+                Закрыть
+              </button>
+            )}
+          </Picker>
+          <div>
+            {!buttonVisibilityPhoto && (
+              <button onClick={() => setButtonVisibilityPhoto(true)}>
+                Поставить картинку на фон
+              </button>
+            )}
+            {buttonVisibilityPhoto && (
+              <input onChange={handleChange} placeholder="url на фото" />
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
