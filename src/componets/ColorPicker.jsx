@@ -10,12 +10,16 @@ const Container = styled.div`
   position: absolute;
   top: 0;
   z-index: -1;
-  ${(props) => `
-    background: ${props.background};
-  `};
+  background-size: contain;
+  background-repeat: no-repeat;
+  ${(props) => {
+    if (props.url == '') {
+      return `background-color: ${props.background};`;
+    }
+  }}
   ${(props) => {
     if (props.url !== '') {
-      return `background: ${props.url};`;
+      return `background-image: url(${props.url});`;
     }
   }}
 `;

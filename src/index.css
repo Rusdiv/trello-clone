@@ -17,6 +17,34 @@ code {
   height: 100%;
 }
 
+.header {
+  position: relative;
+  width: 100%;
+}
+
+.header__popup {
+  padding: 20px;
+  width: 600px;
+}
+
+.header__popup-avatar {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+
+.header__avatar {
+  position: absolute;
+  left: 15px;
+  top: 5px;
+}
+
+.header__title {
+  color: #e4e4e4;
+  text-align: center;
+  font-size: 35px;
+}
+
 .card__input {
   width: 250px;
   margin: 0 auto;

@@ -3,8 +3,9 @@ import { login } from '../../backend/backend';
 const LogIn = 'LogIn';
 
 const initialState = {
-  isAuth: true,
-  isAdmin: true,
+  isAuth: false,
+  isAdmin: false,
+  user: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -17,10 +18,12 @@ const authReducer = (state = initialState, action) => {
             ...state,
             isAuth: true,
             isAdmin: true,
+            user: user,
           };
         }
         return {
           ...state,
+          user: user,
           isAuth: true,
         };
       }
