@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 import TaskPopup from './TaskPopup';
 
+import clipSvg from '../../assets/images/clip.svg';
+
 const Container = styled.div`
   background-color: #fff;
   border-radius: 3px;
@@ -39,12 +41,18 @@ export default function Task(props) {
           ref={provided.innerRef}
         >
           {props.task.content}
+          {props.task.url.length >= 1 && (
+            <p className="task__clip">
+              <img className="task__clip-img" src={clipSvg} alt="clipSvg" />
+              {props.task.url.length}
+            </p>
+          )}
           {taskOpen && (
             <TaskPopup
               handleClose={handleClose}
               handleOpen={handleOpen}
               open={taskOpen}
-              url={props.task.url}
+              urls={props.task.url}
               taskId={props.task.id}
             />
           )}

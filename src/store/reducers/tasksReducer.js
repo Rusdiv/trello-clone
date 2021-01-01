@@ -26,7 +26,7 @@ const tasksReducer = (state = initialState, action) => {
           [newTaskId]: {
             id: newTaskId,
             content: action.newTaskText,
-            url: null,
+            url: [],
           },
         },
         columns: {
@@ -48,12 +48,20 @@ const tasksReducer = (state = initialState, action) => {
         ...action.newState,
       };
     case ADD_URL:
+      if (action.url) {
+        return {
+          ...state,
+          tasks: {
+            ...state.tasks,
+            [action.taskId]: {
+              ...state.tasks[action.taskId],
+              url: [...state.tasks[action.taskId].url, action.url],
+            },
+          },
+        };
+      }
       return {
         ...state,
-        tasks: {
-          ...state.tasks,
-          [action.taskId]: { ...state.tasks[action.taskId], url: action.url },
-        },
       };
     default:
       return {

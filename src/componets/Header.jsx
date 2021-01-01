@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
+import { Button } from '@material-ui/core';
 
 const Popup = (props) => {
   return (
@@ -20,7 +21,7 @@ const Popup = (props) => {
         <p>login:{props.user && props.user[0].userLogin}</p>
         <p>password:{props.user && props.user[0].userPassword}</p>
         <div>
-          <button onClick={() => props.closePopup()}>Закрыть</button>
+          <Button variant="contained" color="primary" onClick={() => props.closePopup()}>Закрыть</Button>
         </div>
       </div>
     </Dialog>

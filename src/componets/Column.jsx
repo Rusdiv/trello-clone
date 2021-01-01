@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
-import Task from './Task';
+import Task from './Task/Task';
 import ColumnInput from './ColumnInput';
 import { connect } from 'react-redux';
 

@@ -91,3 +91,15 @@ code {
 .card__button:hover {
   background-color: #6cd84e;
 }
+
+.task__clip-img {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.task__clip {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}

@@ -13,7 +13,7 @@ const Container = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   ${(props) => {
-    if (props.url == '') {
+    if (props.url === '') {
       return `background-color: ${props.background};`;
     }
   }}

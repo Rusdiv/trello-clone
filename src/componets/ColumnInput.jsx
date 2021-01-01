@@ -10,6 +10,10 @@ function ColumnInput(props) {
     setInputTextValue(e.target.value);
   };
 
+  const handleClose = () => {
+    setInputVisibility(false);
+  }
+
   const handleClick = () => {
     if (inputTextValue !== '') {
       props.addNewTask(inputTextValue, props.columnId, props.title);
@@ -40,6 +44,9 @@ function ColumnInput(props) {
           />
           <button className="card__button" onClick={handleClick}>
             Добавить карточку
+          </button>
+          <button className="card__button" onClick={handleClose}>
+            закрыть
           </button>
         </div>
       )}
