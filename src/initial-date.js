@@ -6,12 +6,18 @@ const initialState = {
       url: ['https://edu.tatar.ru/logon'],
       history: [],
     },
+    'task-2': {
+      id: 'task-2',
+      content: 'some text',
+      url: [],
+      history: [],
+    },
   },
   columns: {
     column1: {
       id: 'column1',
       title: 'To do',
-      taskIds: ['task-1', 'task-2', 'task-3', 'task-4'],
+      taskIds: ['task-1', 'task-2'],
     },
     column2: {
       id: 'column2',

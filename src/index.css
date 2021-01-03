@@ -45,6 +45,10 @@ code {
   font-size: 35px;
 }
 
+.history {
+  margin-left: 20px;
+}
+
 .card__input {
   width: 250px;
   margin: 0 auto;

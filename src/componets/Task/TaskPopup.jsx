@@ -5,11 +5,17 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 
 import { connect } from 'react-redux';
-import { addUrl } from '../../store/reducers/tasksReducer';
+import { addUrl, addToHistory } from '../../store/reducers/tasksReducer';
 import AddUrl from './AddUrl';
+import TaskHistory from './TaskHistory';
 
 function TaskPopup(props) {
   const [urlValue, setUrlValue] = useState('');
+
+  const addUrl = () => {
+    props.addUrl(urlValue, props.taskId);
+    props.addToHistory(props.taskId, 'Добавленна ссылка');
+  };
 
   return (
     <Dialog
@@ -18,14 +24,9 @@ function TaskPopup(props) {
       aria-labelledby="form-dialog-title"
     >
       <AddUrl urlValue={urlValue} urls={props.urls} setUrlValue={setUrlValue} />
+      <TaskHistory task = {props.task}/>
       <DialogActions>
-        <Button onClick={props.handleClose} color="primary">
-          Закрыть
-        </Button>
-        <Button
-          onClick={() => props.addUrl(urlValue, props.taskId)}
-          color="primary"
-        >
+        <Button onClick={addUrl} color="primary">
           Сохранить
         </Button>
       </DialogActions>
@@ -33,4 +34,4 @@ function TaskPopup(props) {
   );
 }
 
-export default connect(null, { addUrl })(TaskPopup);
+export default connect(null, { addUrl, addToHistory })(TaskPopup);

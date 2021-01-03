@@ -49,8 +49,8 @@ export default function Task(props) {
           )}
           {taskOpen && (
             <TaskPopup
+              task={props.task}
               handleClose={handleClose}
-              handleOpen={handleOpen}
               open={taskOpen}
               urls={props.task.url}
               taskId={props.task.id}

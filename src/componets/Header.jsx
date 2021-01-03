@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import { Button } from '@material-ui/core';
 
 const Popup = (props) => {
+  useEffect(() => {}, [props]);
+
   return (
     <Dialog
       onClose={props.closePopup}
@@ -21,7 +23,13 @@ const Popup = (props) => {
         <p>login:{props.user && props.user[0].userLogin}</p>
         <p>password:{props.user && props.user[0].userPassword}</p>
         <div>
-          <Button variant="contained" color="primary" onClick={() => props.closePopup()}>Закрыть</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.closePopup}
+          >
+            Закрыть
+          </Button>
         </div>
       </div>
     </Dialog>
@@ -44,12 +52,15 @@ function Header(props) {
       <div className="header__title">Trello</div>
       <div className="header__avatar" onClick={openPopup}>
         <Avatar>{props.user && props.user[0].userName[0]}</Avatar>
-        <Popup
-          open={open}
-          openPopup={openPopup}
-          closePopup={closePopup}
-          user={props.user}
-        />
+        {open && (
+          <Popup
+            open={open}
+            setOpen={setOpen}
+            openPopup={openPopup}
+            closePopup={closePopup}
+            user={props.user}
+          />
+        )}
       </div>
     </div>
   );
