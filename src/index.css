@@ -107,3 +107,13 @@ code {
   align-items: center;
   margin: 0;
 }
+
+.task__color {
+  height: 20px;
+}
+
+.TaskColor__save {
+  position: absolute;
+  right: 10px;
+  top: 45px;
+}

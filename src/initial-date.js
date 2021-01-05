@@ -5,12 +5,14 @@ const initialState = {
       content: 'log in edu tatar',
       url: ['https://edu.tatar.ru/logon'],
       history: [],
+      color: null,
     },
     'task-2': {
       id: 'task-2',
       content: 'some text',
       url: [],
       history: [],
+      color: null,
     },
   },
   columns: {

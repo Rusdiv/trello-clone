@@ -1,21 +1,23 @@
-import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Button } from '@material-ui/core';
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export default function TaskHistory(props) {
   const [open, setOpen] = useState(false);
+  //
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
-    <div>
+    <div className="history">
       <Button onClick={() => setOpen(true)}>Посмотреть историю</Button>
-      {open && (
-        <div>
-          {props.task.history.map((item) => (
-            <p className="history">{item}</p>
-          ))}
-          <Button color="primary" onClick={() => setOpen(false)}>
-            Закрыть
-          </Button>
-        </div>
-      )}
+      <Menu onClose={handleClose} open={open}>
+        {props.task.history.map((item) => (
+          <MenuItem>{item}</MenuItem>
+        ))}
+      </Menu>
     </div>
   );
 }

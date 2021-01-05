@@ -5,6 +5,7 @@ const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
 const SET_STATE = 'SET_STATE';
 const ADD_URL = 'ADD_URL';
 const ADD_TO_HISTORY = 'ADD_TO_HISTORY';
+const CHANGE_COLOR = 'CHANGE_COLOR';
 
 let initialState = JSON.parse(localStorage.getItem('state'));
 
@@ -28,6 +29,8 @@ const tasksReducer = (state = initialState, action) => {
             id: newTaskId,
             content: action.newTaskText,
             url: [],
+            history: [],
+            color: null,
           },
         },
         columns: {
@@ -47,6 +50,17 @@ const tasksReducer = (state = initialState, action) => {
           [action.taskId]: {
             ...state.tasks[action.taskId],
             history: [...state.tasks[action.taskId].history, action.action],
+          },
+        },
+      };
+    case CHANGE_COLOR:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: {
+            ...state.tasks[action.taskId],
+            color: action.color,
           },
         },
       };
@@ -91,6 +105,12 @@ export const addNewTask = (newTaskText, columnId, title) => ({
 
 export const changeBackground = (color) => ({
   type: CHANGE_BACKGROUND,
+  color,
+});
+
+export const changeTaskColor = (taskId, color) => ({
+  type: CHANGE_COLOR,
+  taskId,
   color,
 });
 

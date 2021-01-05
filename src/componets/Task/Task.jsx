@@ -40,6 +40,12 @@ export default function Task(props) {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
+          {props.task.color && (
+            <div
+              className="task__color"
+              style={{ backgroundColor: props.task.color }}
+            ></div>
+          )}
           {props.task.content}
           {props.task.url.length >= 1 && (
             <p className="task__clip">

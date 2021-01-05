@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { addUrl, addToHistory } from '../../store/reducers/tasksReducer';
 import AddUrl from './AddUrl';
 import TaskHistory from './TaskHistory';
+import TaskColorPicker from './TaskColorPicker';
 
 function TaskPopup(props) {
   const [urlValue, setUrlValue] = useState('');
@@ -23,8 +24,9 @@ function TaskPopup(props) {
       onClose={props.handleClose}
       aria-labelledby="form-dialog-title"
     >
+      <TaskColorPicker taskId={props.taskId} />
       <AddUrl urlValue={urlValue} urls={props.urls} setUrlValue={setUrlValue} />
-      <TaskHistory task = {props.task}/>
+      <TaskHistory task={props.task} />
       <DialogActions>
         <Button onClick={addUrl} color="primary">
           Сохранить
