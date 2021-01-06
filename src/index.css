@@ -117,3 +117,9 @@ code {
   right: 10px;
   top: 45px;
 }
+
+.menu__button {
+  position: fixed;
+  top: 5px;
+  right: 15px;
+}

@@ -11,7 +11,7 @@ let users = [
     userName: 'Test',
     userLogin: 'test',
     userPassword: 'test',
-    isAdmin: false,
+    isAdmin: true,
   },
 ];
 

@@ -1,3 +1,4 @@
+import { Button, ListItem } from '@material-ui/core';
 import React, { useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { connect } from 'react-redux';
@@ -13,71 +14,57 @@ const Container = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   ${(props) => {
-    if (props.url === '') {
-      return `background-color: ${props.background};`;
-    }
-  }}
-  ${(props) => {
-    if (props.url !== '') {
-      return `background-image: url(${props.url});`;
-    }
+    return `background-color: ${props.background};`;
   }}
 `;
 
 const Picker = styled.div`
   display: block;
-  position: fixed;
-  top: 10px;
-  right: 10px;
 `;
 
 function ColorPicker(props) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
-  const [buttonVisibilityPhoto, setButtonVisibilityPhoto] = useState(false);
+  const [color, setColor] = useState(props.background);
 
   const handleChangeComplete = (color) => {
-    props.changeBackground(color.hex);
+    setColor(color.hex);
   };
 
-  const [url, setUrl] = useState('');
-
-  const handleChange = (e) => {
-    setUrl(e.target.value);
+  const saveColor = () => {
+    props.changeBackground(color);
   };
 
   return (
     <div>
-      <Container background={props.background} url={url}></Container>
-      {props.isAdmin && (
+      <Container background={props.background}></Container>
+      {props.button && props.isAdmin && (
         <div>
           <Picker>
             {!buttonVisibility && (
-              <button onClick={() => setButtonVisibility(true)}>
+              <ListItem button onClick={() => setButtonVisibility(true)}>
                 Поменять цвет фона
-              </button>
+              </ListItem>
             )}
             {buttonVisibility && (
               <ChromePicker
-                color={props.background}
+                color={color}
                 onChangeComplete={handleChangeComplete}
               />
             )}
             {buttonVisibility && (
-              <button onClick={() => setButtonVisibility(false)}>
-                Закрыть
-              </button>
+              <div>
+                <Button
+                  variant="outlined"
+                  onClick={() => setButtonVisibility(false)}
+                >
+                  Закрыть
+                </Button>
+                <Button variant="outlined" onClick={() => saveColor()}>
+                  Сохранить
+                </Button>
+              </div>
             )}
           </Picker>
-          <div>
-            {!buttonVisibilityPhoto && (
-              <button onClick={() => setButtonVisibilityPhoto(true)}>
-                Поставить картинку на фон
-              </button>
-            )}
-            {buttonVisibilityPhoto && (
-              <input onChange={handleChange} placeholder="url на фото" />
-            )}
-          </div>
         </div>
       )}
     </div>

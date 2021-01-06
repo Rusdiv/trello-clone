@@ -8,16 +8,15 @@ export default function AddUrl(props) {
   };
   return (
     <DialogContent>
-      Добавить ссылку
       <TextField
         onChange={handleChange}
         value={props.urlValue}
         autoFocus
         margin="dense"
-        label="URL"
+        label="Добавить ссылку"
         fullWidth
       />
-      {props.urls && (
+      {props.urls.length !== 0 && (
         <div>
           <p>Прикрепленные ссылки:</p>
           {props.urls.map((url, index) => (
