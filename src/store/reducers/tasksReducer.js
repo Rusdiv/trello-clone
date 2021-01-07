@@ -4,8 +4,24 @@ const ADD_TASK = 'ADD_TASK';
 const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
 const SET_STATE = 'SET_STATE';
 const ADD_URL = 'ADD_URL';
-const ADD_TO_HISTORY = 'ADD_TO_HISTORY';
+const ADD_TO_TASK_HISTORY = 'ADD_TO_TASK_HISTORY';
 const CHANGE_COLOR = 'CHANGE_COLOR';
+const ADD_TO_DESK_HISTORY = 'ADD_TO_DESK_HISTORY';
+
+const mouths = [
+  'янв',
+  'фев',
+  'март',
+  'апр',
+  'май',
+  'июн',
+  'июл',
+  'авг',
+  'сент',
+  'окт',
+  'нояб',
+  'декаб',
+];
 
 let initialState = JSON.parse(localStorage.getItem('state'));
 
@@ -42,7 +58,33 @@ const tasksReducer = (state = initialState, action) => {
           },
         },
       };
-    case ADD_TO_HISTORY:
+    case ADD_TO_DESK_HISTORY:
+      const date = new Date();
+      const day = date.getDate();
+      const mouth = date.getMonth();
+      const year = date.getFullYear();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+
+      let newHistoryItem = {
+        text: '',
+        time: '',
+      };
+      if (action.variant === 'addTask') {
+        newHistoryItem.text = `${action.user} добавил карточку ${action.card}`;
+        newHistoryItem.time = `${day} ${mouths[mouth]} ${year}г. в ${hours}:${minutes}`;
+      }
+
+      if (action.variant === 'changeDeskColor') {
+        newHistoryItem.text = `${action.user} поменял цвет доски`;
+        newHistoryItem.time = `${day} ${mouths[mouth]} ${year}г. в ${hours}:${minutes}`;
+      }
+
+      return {
+        ...state,
+        history: [...state.history, newHistoryItem],
+      };
+    case ADD_TO_TASK_HISTORY:
       return {
         ...state,
         tasks: {
@@ -96,6 +138,13 @@ const tasksReducer = (state = initialState, action) => {
   }
 };
 
+export const addToDeskHistory = (variant, card, user) => ({
+  type: ADD_TO_DESK_HISTORY,
+  variant,
+  card,
+  user,
+});
+
 export const addNewTask = (newTaskText, columnId, title) => ({
   type: ADD_TASK,
   newTaskText,
@@ -115,7 +164,7 @@ export const changeTaskColor = (taskId, color) => ({
 });
 
 export const addToHistory = (taskId, action) => ({
-  type: ADD_TO_HISTORY,
+  type: ADD_TO_TASK_HISTORY,
   taskId,
   action,
 });

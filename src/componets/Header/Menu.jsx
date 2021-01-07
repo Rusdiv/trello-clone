@@ -2,6 +2,7 @@ import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import ColorPicker from '../ColorPicker';
+import DeskHistory from './DeskHistory';
 
 export default function Menu() {
   const [state, setState] = React.useState({
@@ -22,6 +23,7 @@ export default function Menu() {
   const list = (anchor) => (
     <div role="presentation">
       <ColorPicker button={true} />
+      <DeskHistory />
     </div>
   );
 
@@ -29,7 +31,7 @@ export default function Menu() {
     <div>
       {
         <React.Fragment key={'right'}>
-          <div className='menu__button'>
+          <div className="menu__button">
             <Button
               variant="contained"
               color="primary"

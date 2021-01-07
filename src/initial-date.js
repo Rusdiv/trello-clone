@@ -34,5 +34,6 @@ const initialState = {
   },
   columnOrder: ['column1', 'column2', 'column3'],
   background: '#38B571',
+  history: [],
 };
 export default initialState;

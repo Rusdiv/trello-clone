@@ -2,8 +2,12 @@ import { Button, ListItem } from '@material-ui/core';
 import React, { useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { connect } from 'react-redux';
+import PaletteIcon from '@material-ui/icons/Palette';
 import styled from 'styled-components';
-import { changeBackground } from '../store/reducers/tasksReducer';
+import {
+  changeBackground,
+  addToDeskHistory,
+} from '../store/reducers/tasksReducer';
 
 const Container = styled.div`
   height: 100%;
@@ -32,17 +36,19 @@ function ColorPicker(props) {
 
   const saveColor = () => {
     props.changeBackground(color);
+    props.addToDeskHistory('changeDeskColor', null, props.user[0].userName);
   };
 
   return (
     <div>
-      <Container background={props.background}></Container>
+      {!props.button && <Container background={props.background}></Container>}
       {props.button && props.isAdmin && (
         <div>
           <Picker>
             {!buttonVisibility && (
               <ListItem button onClick={() => setButtonVisibility(true)}>
-                Поменять цвет фона
+                <PaletteIcon />
+                Cменить фон
               </ListItem>
             )}
             {buttonVisibility && (
@@ -76,9 +82,11 @@ const mapStateToProps = (state) => {
     background: state.tasksReducer.background,
     state: state.tasksReducer,
     isAdmin: state.authReducer.isAdmin,
+    user: state.authReducer.user,
   };
 };
 
 export default connect(mapStateToProps, {
   changeBackground,
+  addToDeskHistory,
 })(ColorPicker);

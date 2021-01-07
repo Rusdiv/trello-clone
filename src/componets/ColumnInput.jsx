@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addNewTask } from '../store/reducers/tasksReducer';
+import { addNewTask, addToDeskHistory } from '../store/reducers/tasksReducer';
 
 function ColumnInput(props) {
   const [inputVisibility, setInputVisibility] = useState(false);
@@ -12,11 +12,12 @@ function ColumnInput(props) {
 
   const handleClose = () => {
     setInputVisibility(false);
-  }
+  };
 
   const handleClick = () => {
     if (inputTextValue !== '') {
       props.addNewTask(inputTextValue, props.columnId, props.title);
+      props.addToDeskHistory('addTask', inputTextValue, props.user[0].userName);
       setInputVisibility(false);
     } else {
       setInputVisibility(false);
@@ -54,4 +55,12 @@ function ColumnInput(props) {
   );
 }
 
-export default connect(null, { addNewTask })(ColumnInput);
+const mapStateToProps = (state) => {
+  return {
+    user: state.authReducer.user,
+  };
+};
+
+export default connect(mapStateToProps, { addNewTask, addToDeskHistory })(
+  ColumnInput
+);

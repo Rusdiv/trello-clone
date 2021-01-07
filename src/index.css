@@ -123,3 +123,15 @@ code {
   top: 5px;
   right: 15px;
 }
+
+.DeskTitle {
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  border-top: 1px solid rgb(158, 158, 158);
+}
+
+.DeskHistory {
+  width: 95%;
+  margin: 10px auto;
+}
