@@ -1,4 +1,4 @@
-let users = [
+const users = [
   {
     userId: 1,
     userName: 'Ruslan',
@@ -8,12 +8,14 @@ let users = [
   },
   {
     userId: 2,
-    userName: 'Test',
+    userName: 'Andrey',
     userLogin: 'test',
     userPassword: 'test',
     isAdmin: true,
   },
 ];
+
+export const userNames = users.map((user) => user.userName);
 
 export const login = (login, password) => {
   const usersArrWithNull = users.map((user) => {

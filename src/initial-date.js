@@ -1,3 +1,5 @@
+import { userNames } from './backend/backend';
+
 const initialState = {
   tasks: {
     'task-1': {
@@ -6,6 +8,7 @@ const initialState = {
       url: ['https://edu.tatar.ru/logon'],
       history: [],
       color: null,
+      users: [],
     },
     'task-2': {
       id: 'task-2',
@@ -13,6 +16,7 @@ const initialState = {
       url: [],
       history: [],
       color: null,
+      users: [],
     },
   },
   columns: {
@@ -35,5 +39,6 @@ const initialState = {
   columnOrder: ['column1', 'column2', 'column3'],
   background: '#38B571',
   history: [],
+  users: userNames,
 };
 export default initialState;

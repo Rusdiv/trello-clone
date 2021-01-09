@@ -7,6 +7,7 @@ const ADD_URL = 'ADD_URL';
 const ADD_TO_TASK_HISTORY = 'ADD_TO_TASK_HISTORY';
 const CHANGE_COLOR = 'CHANGE_COLOR';
 const ADD_TO_DESK_HISTORY = 'ADD_TO_DESK_HISTORY';
+const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK';
 
 const mouths = [
   'янв',
@@ -47,6 +48,7 @@ const tasksReducer = (state = initialState, action) => {
             url: [],
             history: [],
             color: null,
+            users: [],
           },
         },
         columns: {
@@ -58,6 +60,17 @@ const tasksReducer = (state = initialState, action) => {
           },
         },
       };
+    case ADD_USER_TO_TASK:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: {
+            ...state.tasks[action.taskId],
+            users: [...state.tasks[action.taskId].users, action.newUser],
+          },
+        },
+      };
     case ADD_TO_DESK_HISTORY:
       const date = new Date();
       const day = date.getDate();
@@ -66,18 +79,31 @@ const tasksReducer = (state = initialState, action) => {
       const hours = date.getHours();
       const minutes = date.getMinutes();
 
+      const time = `${day} ${mouths[mouth]} ${year}г. в ${hours}:${minutes}`;
+
       let newHistoryItem = {
         text: '',
         time: '',
       };
+
       if (action.variant === 'addTask') {
         newHistoryItem.text = `${action.user} добавил карточку ${action.card}`;
-        newHistoryItem.time = `${day} ${mouths[mouth]} ${year}г. в ${hours}:${minutes}`;
+        newHistoryItem.time = time;
       }
 
       if (action.variant === 'changeDeskColor') {
         newHistoryItem.text = `${action.user} поменял цвет доски`;
-        newHistoryItem.time = `${day} ${mouths[mouth]} ${year}г. в ${hours}:${minutes}`;
+        newHistoryItem.time = time;
+      }
+
+      if (action.variant === 'changeTaskColor') {
+        newHistoryItem.text = `${action.user} поменял цвет у ${action.card}`;
+        newHistoryItem.time = time;
+      }
+
+      if (action.variant === 'addUrl') {
+        newHistoryItem.text = `${action.user} добавил ссылку у ${action.card}`;
+        newHistoryItem.time = time;
       }
 
       return {
@@ -150,6 +176,12 @@ export const addNewTask = (newTaskText, columnId, title) => ({
   newTaskText,
   columnId,
   title,
+});
+
+export const addUserToTask = (taskId, newUser) => ({
+  type: ADD_USER_TO_TASK,
+  taskId,
+  newUser,
 });
 
 export const changeBackground = (color) => ({

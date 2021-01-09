@@ -12,7 +12,7 @@ export default function TaskHistory(props) {
   };
   return (
     <div className="history">
-      <Button onClick={() => setOpen(true)}>Посмотреть историю</Button>
+      <Button variant='outlined' color='primary' onClick={() => setOpen(true)}>Посмотреть историю</Button>
       <Menu onClose={handleClose} open={open}>
         {props.task.history.map((item) => (
           <MenuItem>{item}</MenuItem>

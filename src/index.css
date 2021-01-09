@@ -17,6 +17,10 @@ code {
   height: 100%;
 }
 
+.addedUsers {
+  margin-left: 5px;
+}
+
 .header {
   position: relative;
   width: 100%;
@@ -47,6 +51,7 @@ code {
 
 .history {
   margin-left: 20px;
+  margin-bottom: 15px;
 }
 
 .card__input {
@@ -110,6 +115,14 @@ code {
 
 .task__color {
   height: 20px;
+}
+
+.addUser {
+  margin-left: 20px;
+}
+
+.TaskColor {
+  width: 500px;
 }
 
 .TaskColor__save {

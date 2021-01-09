@@ -55,6 +55,7 @@ export default function Task(props) {
           )}
           {taskOpen && (
             <TaskPopup
+              lastColor={props.task.color}
               task={props.task}
               handleClose={handleClose}
               open={taskOpen}
