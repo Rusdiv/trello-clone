@@ -30,6 +30,15 @@ function AddTime(props) {
 
   return (
     <div className={classes.container}>
+      {!props.task.time && (
+        <Button
+          onClick={() => setOpen(true)}
+          variant="outlined"
+          color="primary"
+        >
+          Добавить время
+        </Button>
+      )}
       {props.task.time && <div>Назначенное время:{props.task.time}</div>}
       {props.task.time && (
         <div>

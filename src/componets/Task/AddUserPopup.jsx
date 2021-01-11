@@ -9,7 +9,10 @@ import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addUserToTask } from '../../store/reducers/tasksReducer';
+import {
+  addUserToTask,
+  addToDeskHistory,
+} from '../../store/reducers/tasksReducer';
 
 function AddUserPopup(props) {
   const { onChangeUser, selectedValue, open } = props;
@@ -24,6 +27,11 @@ function AddUserPopup(props) {
   const handleListItemClick = (value) => {
     onChangeUser(value);
     props.addUserToTask(props.task.id, value);
+    props.addToDeskHistory(
+      'addUser',
+      props.task.content,
+      props.user[0].userName
+    );
   };
 
   return (
@@ -52,10 +60,13 @@ function AddUserPopup(props) {
 const mapStateToProps = (state) => {
   return {
     users: state.tasksReducer.users,
+    user: state.authReducer.user,
   };
 };
 
-export default connect(mapStateToProps, { addUserToTask })(AddUserPopup);
+export default connect(mapStateToProps, { addToDeskHistory, addUserToTask })(
+  AddUserPopup
+);
 
 AddUserPopup.propTypes = {
   onClose: PropTypes.func.isRequired,

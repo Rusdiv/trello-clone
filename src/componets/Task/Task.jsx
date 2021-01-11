@@ -46,7 +46,7 @@ export default function Task(props) {
               style={{ backgroundColor: props.task.color }}
             ></div>
           )}
-          {props.task.content}
+          <div className="task__text">{props.task.content}</div>
           {props.task.url.length >= 1 && (
             <p className="task__clip">
               <img className="task__clip-img" src={clipSvg} alt="clipSvg" />

@@ -1,6 +1,7 @@
 import initialDate from '../../initial-date';
 
 const ADD_TASK = 'ADD_TASK';
+const ADD_COLUMN = 'ADD_COLUMN';
 const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND';
 const SET_STATE = 'SET_STATE';
 const ADD_URL = 'ADD_URL';
@@ -32,9 +33,25 @@ if (!initialState) {
 }
 
 let idCounter = Object.keys(initialState.tasks).length + 1;
+let ColumnIdCounter = Object.keys(initialState.columns).length + 1;
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_COLUMN:
+      const newColumnId = `column${ColumnIdCounter}`;
+      ++ColumnIdCounter;
+      return {
+        ...state,
+        columns: {
+          ...state.columns,
+          [newColumnId]: {
+            title: action.title,
+            id: newColumnId,
+            taskIds: [],
+          },
+        },
+        columnOrder: [...state.columnOrder, newColumnId],
+      };
     case ADD_TASK:
       const newTaskId = `task-${idCounter}`;
       const columnId = action.columnId;
@@ -92,6 +109,11 @@ const tasksReducer = (state = initialState, action) => {
         newHistoryItem.time = time;
       }
 
+      if (action.variant === 'addColumn') {
+        newHistoryItem.text = `${action.user} добавил колонку ${action.card}`;
+        newHistoryItem.time = time;
+      }
+
       if (action.variant === 'changeDeskColor') {
         newHistoryItem.text = `${action.user} поменял цвет доски`;
         newHistoryItem.time = time;
@@ -99,6 +121,11 @@ const tasksReducer = (state = initialState, action) => {
 
       if (action.variant === 'changeTaskColor') {
         newHistoryItem.text = `${action.user} поменял цвет у ${action.card}`;
+        newHistoryItem.time = time;
+      }
+
+      if (action.variant === 'addUser') {
+        newHistoryItem.text = `${action.user} добавил пользователя у ${action.card}`;
         newHistoryItem.time = time;
       }
 
@@ -199,6 +226,11 @@ export const addUserToTask = (taskId, newUser) => ({
   type: ADD_USER_TO_TASK,
   taskId,
   newUser,
+});
+
+export const addColumn = (title) => ({
+  type: ADD_COLUMN,
+  title,
 });
 
 export const changeBackground = (color) => ({

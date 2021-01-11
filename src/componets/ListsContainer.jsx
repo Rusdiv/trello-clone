@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import Column from './Column';
 import { addNewTask, setState } from '../store/reducers/tasksReducer';
+import AddColumn from './AddColumn';
 
 const Container = styled.div`
   display: flex;
@@ -87,6 +88,7 @@ function ListsContainer(props) {
           const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
           return <Column key={column.id} column={column} tasks={tasks} />;
         })}
+        <AddColumn />
       </Container>
     </DragDropContext>
   );

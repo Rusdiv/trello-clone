@@ -113,6 +113,10 @@ code {
   margin: 0;
 }
 
+.task__text {
+  word-wrap: break-word;
+}
+
 .task__color {
   height: 20px;
 }
@@ -147,4 +151,10 @@ code {
 .DeskHistory {
   width: 95%;
   margin: 10px auto;
+}
+
+.columnBackground {
+  margin-top: 8px;
+  background-color: #c9c9c9;
+  height: 36px;
 }

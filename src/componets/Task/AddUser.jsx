@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import AddUserPopup from './AddUserPopup';
+import { connect } from 'react-redux';
 
 export default function AddUser(props) {
   const [open, setOpen] = React.useState(false);
@@ -39,3 +40,4 @@ export default function AddUser(props) {
     </div>
   );
 }
+
