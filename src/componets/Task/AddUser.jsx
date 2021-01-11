@@ -19,9 +19,11 @@ export default function AddUser(props) {
     <div className="addUser">
       {props.task.users && (
         <div>
-          Добавленные пользователи:
+          {props.task.users.length != 0 && (
+            <span>Добавленные пользователи:</span>
+          )}
           {props.task.users.map((user) => (
-            <span className='addedUsers'>{user}</span>
+            <span className="addedUsers">{user}</span>
           ))}
         </div>
       )}

@@ -13,6 +13,7 @@ import AddUrl from './AddUrl';
 import TaskHistory from './TaskHistory';
 import TaskColorPicker from './TaskColorPicker';
 import AddUser from './AddUser';
+import AddTime from './AddTime';
 
 function TaskPopup(props) {
   const [urlValue, setUrlValue] = useState('');
@@ -63,6 +64,7 @@ function TaskPopup(props) {
       <AddUrl urlValue={urlValue} urls={props.urls} setUrlValue={setUrlValue} />
       <TaskHistory task={props.task} />
       <AddUser task={props.task} />
+      <AddTime task={props.task} />
       <DialogActions>
         <Button onClick={handleClick} color="primary">
           Сохранить

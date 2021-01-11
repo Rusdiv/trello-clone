@@ -8,6 +8,7 @@ const ADD_TO_TASK_HISTORY = 'ADD_TO_TASK_HISTORY';
 const CHANGE_COLOR = 'CHANGE_COLOR';
 const ADD_TO_DESK_HISTORY = 'ADD_TO_DESK_HISTORY';
 const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK';
+const ADD_TIME = 'ADD_TIME';
 
 const mouths = [
   'янв',
@@ -106,6 +107,11 @@ const tasksReducer = (state = initialState, action) => {
         newHistoryItem.time = time;
       }
 
+      if (action.variant === 'addTime') {
+        newHistoryItem.text = `${action.user} добавил время у ${action.card}`;
+        newHistoryItem.time = time;
+      }
+
       return {
         ...state,
         history: [...state.history, newHistoryItem],
@@ -129,6 +135,17 @@ const tasksReducer = (state = initialState, action) => {
           [action.taskId]: {
             ...state.tasks[action.taskId],
             color: action.color,
+          },
+        },
+      };
+    case ADD_TIME:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: {
+            ...state.tasks[action.taskId],
+            time: action.time,
           },
         },
       };
@@ -187,6 +204,12 @@ export const addUserToTask = (taskId, newUser) => ({
 export const changeBackground = (color) => ({
   type: CHANGE_BACKGROUND,
   color,
+});
+
+export const addTime = (taskId, time) => ({
+  type: ADD_TIME,
+  taskId,
+  time,
 });
 
 export const changeTaskColor = (taskId, color) => ({

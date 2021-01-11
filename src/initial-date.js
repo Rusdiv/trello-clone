@@ -9,6 +9,7 @@ const initialState = {
       history: [],
       color: null,
       users: [],
+      time: null,
     },
     'task-2': {
       id: 'task-2',
@@ -17,6 +18,7 @@ const initialState = {
       history: [],
       color: null,
       users: [],
+      time: null,
     },
   },
   columns: {
