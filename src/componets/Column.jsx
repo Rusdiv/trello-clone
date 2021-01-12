@@ -6,7 +6,7 @@ import ColumnInput from './ColumnInput';
 import { connect } from 'react-redux';
 
 const Container = styled.div`
-  min-heigth: 100px;
+  min-width: 272px;
   width: 272px;
   margin: 8px;
   border-radius: 3px;
